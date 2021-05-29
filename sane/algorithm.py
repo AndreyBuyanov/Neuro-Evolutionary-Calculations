@@ -1,6 +1,7 @@
 from typing import List
 import numpy as np
 import random
+from copy import deepcopy
 from .neuron_population import NeuronPopulation
 from .blueprint_population import BlueprintPopulation
 from .nn import NeuralNetwork
@@ -26,20 +27,38 @@ class SANEAlgorithm(object):
     def train(self, generations_count: int, x_train: np.array, y_train: np.array):
         if x_train.ndim != y_train.ndim:
             raise Exception()
-        dataset_size = x_train.ndim
+        result = []
         for generation in range(generations_count):
-            self.blueprint_population.reset_neurons_fitness()
             inputs_count = x_train[0].size
             outputs_count = y_train[0].size
             neural_networks = self.create_neural_networks(
                 inputs_count=inputs_count,
                 outputs_count=outputs_count)
-            for i in range(len(neural_networks)):
-                data_index = random.randrange(dataset_size)
-                output = neural_networks[i].forward(x_train[data_index])
-                self.blueprint_population[i].fitness = mse(y_train[data_index], output)
+            self.forward(
+                neural_networks=neural_networks,
+                x_train=x_train,
+                y_train=y_train)
+            neural_networks.sort(key=lambda x: x.fitness)
+            best_nn = neural_networks[0]
+            result.append((
+                best_nn.fitness,
+                deepcopy(best_nn.input_weights),
+                deepcopy(best_nn.output_weights)))
             self.update_neuron_fitness()
-            self.neuron_population.sort()
+            self.neuron_population.crossover()
+            self.neuron_population.mutation()
+            self.blueprint_population.crossover()
+            self.blueprint_population.mutation()
+        return result
+
+    def forward(self, neural_networks: List[NeuralNetwork], x_train: np.array, y_train: np.array):
+        dataset_size = x_train.shape[0]
+        for i in range(len(neural_networks)):
+            data_index = random.randrange(dataset_size)
+            output = neural_networks[i].forward(x_train[data_index])
+            error = mse(y_train[data_index], output)
+            neural_networks[i].fitness = error
+            self.blueprint_population[i].fitness = error
 
     def create_neural_networks(self, inputs_count: int, outputs_count: int) -> List[NeuralNetwork]:
         result = []
@@ -48,16 +67,16 @@ class SANEAlgorithm(object):
             result.append(NeuralNetwork(
                 hidden_neurons=hidden_neurons,
                 inputs_count=inputs_count,
-                outputs_count=outputs_count))
+                outputs_count=outputs_count,
+                neuron_population=self.neuron_population))
         return result
 
     def update_neuron_fitness(self):
         for i in range(len(self.neuron_population)):
-            neuron_id = self.neuron_population[i].id
             fitness_list = []
-            for blueprint in self.blueprint_population:
-                if neuron_id in blueprint.neurons:
-                    fitness_list.append(blueprint.fitness)
+            for j in range(len(self.blueprint_population)):
+                if i in self.blueprint_population[j].neurons:
+                    fitness_list.append(self.blueprint_population[j].fitness)
                 if len(fitness_list) == 5:
                     break
             self.neuron_population[i].fitness = np.array(fitness_list).mean() if len(fitness_list) > 0 else 0.0

@@ -3,10 +3,9 @@ from .gene import Gene, ConnectionType
 
 
 class Neuron(object):
-    def __init__(self, connections_count: int, neuron_id: int):
+    def __init__(self, connections_count: int):
         self.genes = []
         self.connections_count = connections_count
-        self.neuron_id = neuron_id
         self.fitness = 0.0
 
     def init(self, min_value: float, max_value: float):
@@ -20,6 +19,7 @@ class Neuron(object):
             connection_types = [connection.get_connection_type().value for connection in self.genes]
             if len(set(connection_types)) > 1:
                 break
+            self.genes.clear()
 
     def get_weights(self, neurons_count: int, connection: ConnectionType) -> np.array:
         result = np.zeros(neurons_count)
@@ -38,9 +38,19 @@ class Neuron(object):
             neurons_count=neurons_count,
             connection=ConnectionType.OUTPUT)
 
-    def reset_fitness(self):
-        self.fitness = 0.0
+    def mutation(self):
+        for i in range(len(self.genes)):
+            self.genes[i].mutation()
 
-    def get_id(self) -> int:
-        return self.neuron_id
-    id = property(get_id)
+    @staticmethod
+    def crossover(parent1, parent2):
+        genes_count = len(parent1.genes)
+        connections_count = parent1.connections_count
+        child1 = Neuron(connections_count=connections_count)
+        child2 = Neuron(connections_count=connections_count)
+        for i in range(genes_count):
+            child1_gene, child2_gene = Gene.crossover(
+                parent1=parent1.genes[i], parent2=parent2.genes[i])
+            child1.genes.append(child1_gene)
+            child2.genes.append(child2_gene)
+        return child1, child2
