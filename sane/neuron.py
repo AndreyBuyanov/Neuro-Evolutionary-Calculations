@@ -9,7 +9,7 @@ class Neuron(object):
 
     def init(self, min_value: float, max_value: float):
         while True:
-            for i in range(0, len(self.genes)):
+            for i in range(len(self.genes)):
                 self.genes[i] = Gene(
                     min_value=min_value,
                     max_value=max_value)

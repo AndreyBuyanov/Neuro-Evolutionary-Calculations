@@ -10,11 +10,11 @@ class Blueprints(object):
                 connections_count=connections_count)
 
     def init(self, min_value: float, max_value: float):
-        for i in range(0, len(self.blueprints)):
+        for i in range(len(self.blueprints)):
             self.blueprints[i].init(
                 min_value=min_value,
                 max_value=max_value)
 
     def reset_neurons_fitness(self):
-        for i in range(0, len(self.blueprints)):
+        for i in range(len(self.blueprints)):
             self.blueprints[i].reset_neurons_fitness()
