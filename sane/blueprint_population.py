@@ -1,7 +1,7 @@
 from .blueprint import Blueprint
 
 
-class Blueprints(object):
+class BlueprintPopulation(object):
     def __init__(self, blueprints_count: int, neurons_count: int, connections_count: int):
         self.blueprints = [None] * blueprints_count
         for i in range(blueprints_count):
