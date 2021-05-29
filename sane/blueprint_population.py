@@ -37,3 +37,6 @@ class BlueprintPopulation(object):
 
     def __len__(self):
         return len(self.blueprints)
+
+    def __iter__(self):
+        return iter(self.blueprints)

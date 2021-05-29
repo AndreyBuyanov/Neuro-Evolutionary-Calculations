@@ -14,6 +14,9 @@ class NeuronPopulation(object):
                 min_value=min_value,
                 max_value=max_value)
 
+    def sort(self):
+        self.neurons.sort(key=lambda x: x.fitness)
+
     def __getitem__(self, key: int) -> Neuron:
         return self.neurons[key]
 
