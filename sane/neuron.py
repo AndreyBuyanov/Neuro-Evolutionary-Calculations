@@ -5,6 +5,7 @@ from .gene import Gene, ConnectionType
 class Neuron(object):
     def __init__(self, connections_count: int):
         self.genes = [None] * connections_count
+        self.fitness = 0.0
 
     def init(self, min_value: float, max_value: float):
         while True:
@@ -33,3 +34,6 @@ class Neuron(object):
         return self.get_weights(
             neurons_count=neurons_count,
             connection=ConnectionType.OUTPUT)
+
+    def reset_fitness(self):
+        self.fitness = 0.0

@@ -12,4 +12,5 @@ class SANEAlgorithm(object):
         self.blueprints.init(min_value=min_value, max_value=max_value)
 
     def run(self, generations_count: int):
-        pass
+        for i in range(generations_count):
+            self.blueprints.reset_neurons_fitness()
