@@ -1,8 +1,8 @@
 from typing import List
 import numpy as np
-from neuron import Neuron
-from layer import Layer
-from activations import Sigmoid
+from .neuron import Neuron
+from .layer import Layer
+from .activations import Sigmoid
 
 
 class NeuralNetwork(object):

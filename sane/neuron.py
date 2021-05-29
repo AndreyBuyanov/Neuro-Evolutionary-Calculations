@@ -1,5 +1,5 @@
 import numpy as np
-from gene import Gene, ConnectionType
+from .gene import Gene, ConnectionType
 
 
 class Neuron(object):
@@ -9,9 +9,11 @@ class Neuron(object):
     def init(self, min_value: float, max_value: float):
         while True:
             for i in range(0, len(self.genes)):
-                self.genes[i] = Gene(min_value=min_value, max_value=max_value)
+                self.genes[i] = Gene(
+                    min_value=min_value,
+                    max_value=max_value)
                 self.genes[i].init()
-            connection_types = [connection.get_connection_yype().value for connection in self.genes]
+            connection_types = [connection.get_connection_type().value for connection in self.genes]
             if len(set(connection_types)) > 1:
                 break
 
@@ -23,7 +25,11 @@ class Neuron(object):
         return result
 
     def get_input_weights(self, neurons_count: int) -> np.array:
-        return self.get_weights(neurons_count=neurons_count, connection=ConnectionType.INPUT)
+        return self.get_weights(
+            neurons_count=neurons_count,
+            connection=ConnectionType.INPUT)
 
     def get_output_weights(self, neurons_count: int) -> np.array:
-        return self.get_weights(neurons_count=neurons_count, connection=ConnectionType.OUTPUT)
+        return self.get_weights(
+            neurons_count=neurons_count,
+            connection=ConnectionType.OUTPUT)

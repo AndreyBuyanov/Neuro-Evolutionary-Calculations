@@ -1,4 +1,4 @@
-from blueprints import Blueprints
+from .blueprints import Blueprints
 
 
 class SANEAlgorithm(object):
@@ -8,8 +8,8 @@ class SANEAlgorithm(object):
             neurons_count=neurons_count,
             connections_count=connections_count)
 
-    def init(self):
-        self.blueprints.init()
+    def init(self, min_value: float, max_value: float):
+        self.blueprints.init(min_value=min_value, max_value=max_value)
 
     def run(self, generations_count: int):
         pass

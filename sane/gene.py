@@ -14,22 +14,22 @@ class ConnectionType(Enum):
 
 class Integer16Gene(object):
     def __init__(self, value: float, min_value: float, max_value: float):
-        self.value = value
+        self.float_value = value
         self.min_value = min_value
         self.max_value = max_value
 
     def init(self):
-        self.value = uniform(self.min_value, self.max_value)
+        self.float_value = uniform(self.min_value, self.max_value)
 
     def get_int_value(self) -> c_uint16:
-        return c_uint16(int((self.value - self.min_value) * (2**16 - 1) / (self.max_value - self.min_value)))
+        return c_uint16(int((self.float_value - self.min_value) * (2**16 - 1) / (self.max_value - self.min_value)))
 
     def set_int_value(self, int_value: c_uint16):
-        self.value = int_value.value * (self.max_value - self.min_value) / (2**16 - 1) + self.min_value
+        self.float_value = int_value.value * (self.max_value - self.min_value) / (2**16 - 1) + self.min_value
     int_value = property(get_int_value, set_int_value)
 
     def get_value(self) -> float:
-        return self.value
+        return self.float_value
     value = property(get_value)
 
 
