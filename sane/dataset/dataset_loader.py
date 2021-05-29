@@ -2,7 +2,7 @@ import os
 import numpy as np
 
 
-def load(dataset, inputs, outputs):
+def transform_data(dataset, inputs, outputs):
     input_data = np.zeros((len(dataset), inputs))
     output_data = np.zeros((len(dataset), outputs))
     for i in range(len(dataset)):
@@ -12,7 +12,7 @@ def load(dataset, inputs, outputs):
     return input_data, output_data
 
 
-def load_raw(path):
+def load(path):
     with open(path, 'r') as f:
         lines = f.readlines()
 
@@ -28,18 +28,18 @@ def load_raw(path):
         outputs = bool_out + real_out
 
         current_line = 7
-        train_x, train_y = load(lines[current_line:current_line + training_examples_count], inputs, outputs)
+        train_x, train_y = transform_data(lines[current_line:current_line + training_examples_count], inputs, outputs)
         current_line += training_examples_count
-        validation_x, validation_y = load(lines[current_line:current_line + validation_examples_count], inputs, outputs)
+        validation_x, validation_y = transform_data(lines[current_line:current_line + validation_examples_count], inputs, outputs)
         current_line += validation_examples_count
-        test_x, test_y = load(lines[current_line:current_line + test_examples_count], inputs, outputs)
+        test_x, test_y = transform_data(lines[current_line:current_line + test_examples_count], inputs, outputs)
 
         return train_x, train_y, validation_x, validation_y, test_x, test_y
 
 
 class AbstractDataset(object):
     def __init__(self, path):
-        self.train_x, self.train_y, self.validation_x, self.validation_y, self.test_x, self.test_y = load_raw(path)
+        self.train_x, self.train_y, self.validation_x, self.validation_y, self.test_x, self.test_y = load(path)
 
     def get_train_data(self):
         return self.train_x, self.train_y
