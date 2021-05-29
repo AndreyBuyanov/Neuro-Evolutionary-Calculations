@@ -13,8 +13,10 @@ class NeuralNetwork(object):
             self.input_weights[i] = hidden_neurons[i].get_input_weights(inputs_count)
             self.output_weights[i] = hidden_neurons[i].get_output_weights(outputs_count)
         self.layers = []
-        self.layers.append(Layer(self.input_weights), Sigmoid())
-        self.layers.append(Layer(self.output_weights), Sigmoid())
+        self.layers.append(
+            Layer(weights=self.input_weights, activation=Sigmoid()))
+        self.layers.append(
+            Layer(weights=self.output_weights, activation=Sigmoid()))
 
     def forward(self, input_data: np.array) -> np.array:
         output = input_data
