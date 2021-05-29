@@ -16,6 +16,7 @@ class SANEAlgorithm(object):
         self.blueprint_population = BlueprintPopulation(
             population_size=blueprints_population_size,
             blueprint_size=hidden_layer_size)
+        self.best_nn = None
 
     def init(self, min_value: float, max_value: float):
         self.neuron_population.init(
@@ -25,7 +26,7 @@ class SANEAlgorithm(object):
             neuron_population=self.neuron_population)
 
     def train(self, generations_count: int, x_train: np.array, y_train: np.array):
-        if x_train.ndim != y_train.ndim:
+        if x_train.shape[0] != y_train.shape[0]:
             raise Exception()
         result = []
         for generation in range(generations_count):
@@ -34,7 +35,7 @@ class SANEAlgorithm(object):
             neural_networks = self.create_neural_networks(
                 inputs_count=inputs_count,
                 outputs_count=outputs_count)
-            self.forward(
+            self.forward_train(
                 neural_networks=neural_networks,
                 x_train=x_train,
                 y_train=y_train)
@@ -44,6 +45,7 @@ class SANEAlgorithm(object):
                 best_nn.fitness,
                 deepcopy(best_nn.input_weights),
                 deepcopy(best_nn.output_weights)))
+            self.best_nn = best_nn if self.best_nn is None or best_nn.fitness < self.best_nn.fitness else self.best_nn
             self.update_neuron_fitness()
             self.neuron_population.crossover()
             self.neuron_population.mutation()
@@ -51,7 +53,21 @@ class SANEAlgorithm(object):
             self.blueprint_population.mutation()
         return result
 
-    def forward(self, neural_networks: List[NeuralNetwork], x_train: np.array, y_train: np.array):
+    def test(self, x_test: np.array, y_test: np.array):
+        if x_test.shape[0] != y_test.shape[0]:
+            raise Exception()
+        dataset_size = x_test.shape[0]
+        result = []
+        for i in range(dataset_size):
+            error = self.forward(x_test[i], y_test[i])
+            result.append(error)
+        return result
+
+    def forward(self, x: np.array, y: np.array):
+        output = self.best_nn.forward(x)
+        return mse(y, output)
+
+    def forward_train(self, neural_networks: List[NeuralNetwork], x_train: np.array, y_train: np.array):
         dataset_size = x_train.shape[0]
         for i in range(len(neural_networks)):
             data_index = random.randrange(dataset_size)
