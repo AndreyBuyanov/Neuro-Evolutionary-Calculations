@@ -21,9 +21,9 @@ class BlueprintPopulation(object):
         result = []
         while True:
             for i in range(self.blueprint_size):
-                result.append(random.choice(neuron_population))
+                result.append(random.choice(seq=neuron_population))
             neuron_identifiers = [neuron.id for neuron in result]
-            if len(set(neuron_identifiers)) > 1:
+            if len(set(neuron_identifiers)) == self.blueprint_size:
                 break
             result.clear()
         return result
