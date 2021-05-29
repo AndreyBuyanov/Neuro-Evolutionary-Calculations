@@ -3,8 +3,9 @@ from .gene import Gene, ConnectionType
 
 
 class Neuron(object):
-    def __init__(self, connections_count: int):
+    def __init__(self, connections_count: int, neuron_id: int):
         self.genes = [None] * connections_count
+        self.neuron_id = neuron_id
         self.fitness = 0.0
 
     def init(self, min_value: float, max_value: float):
@@ -37,3 +38,7 @@ class Neuron(object):
 
     def reset_fitness(self):
         self.fitness = 0.0
+
+    def get_id(self) -> int:
+        return self.neuron_id
+    id = property(get_id)
