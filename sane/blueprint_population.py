@@ -31,3 +31,9 @@ class BlueprintPopulation(object):
     def reset_neurons_fitness(self):
         for i in range(len(self.blueprints)):
             self.blueprints[i].reset_neurons_fitness()
+
+    def __getitem__(self, key: int) -> Blueprint:
+        return self.blueprints[key]
+
+    def __len__(self):
+        return len(self.blueprints)
