@@ -1,6 +1,6 @@
 from typing import List
 import numpy as np
-import random
+import platform
 from copy import deepcopy
 from .neuron_population import NeuronPopulation
 from .blueprint_population import BlueprintPopulation
@@ -8,8 +8,15 @@ from .nn import NeuralNetwork
 from .utils import mse
 
 
+CRLF = '\r\x1B[K' if platform.system() != 'Windows' else '\r'
+
+
 class SANEAlgorithm(object):
-    def __init__(self, blueprints_population_size: int, neuron_population_size: int, hidden_layer_size: int, connections_count: int):
+    def __init__(self,
+                 blueprints_population_size: int,
+                 neuron_population_size: int,
+                 hidden_layer_size: int,
+                 connections_count: int):
         self.neuron_population = NeuronPopulation(
             population_size=neuron_population_size,
             connections_count=connections_count)
@@ -18,14 +25,19 @@ class SANEAlgorithm(object):
             blueprint_size=hidden_layer_size)
         self.best_nn = None
 
-    def init(self, min_value: float, max_value: float):
+    def init(self,
+             min_value: float,
+             max_value: float):
         self.neuron_population.init(
             min_value=min_value,
             max_value=max_value)
         self.blueprint_population.init(
             neuron_population=self.neuron_population)
 
-    def train(self, generations_count: int, x_train: np.array, y_train: np.array):
+    def train(self,
+              generations_count: int,
+              x_train: np.array,
+              y_train: np.array):
         if x_train.shape[0] != y_train.shape[0]:
             raise Exception()
         result = []
@@ -41,25 +53,29 @@ class SANEAlgorithm(object):
                 y_train=y_train)
             neural_networks.sort(key=lambda x: x.fitness)
             best_nn = neural_networks[0]
-            result.append((
-                best_nn.fitness,
-                deepcopy(best_nn.input_weights),
-                deepcopy(best_nn.output_weights)))
-            self.best_nn = best_nn if self.best_nn is None or best_nn.fitness < self.best_nn.fitness else self.best_nn
+            if self.best_nn is None:
+                self.best_nn = deepcopy(best_nn)
+            if best_nn.fitness < self.best_nn.fitness:
+                self.best_nn = deepcopy(best_nn)
+            result.append(self.best_nn.fitness)
             self.update_neuron_fitness()
             self.neuron_population.crossover()
             self.neuron_population.mutation()
             self.blueprint_population.crossover()
             self.blueprint_population.mutation()
+            print('{}{}/{} best fitness = {}, current fitness = {}'
+                  .format(CRLF, generation, generations_count, self.best_nn.fitness, best_nn.fitness), end='')
         return result
 
-    def test(self, x_test: np.array, y_test: np.array):
+    def test(self,
+             x_test: np.array,
+             y_test: np.array):
         if x_test.shape[0] != y_test.shape[0]:
             raise Exception()
         dataset_size = x_test.shape[0]
         result = []
         for i in range(dataset_size):
-            error = self.forward(x_test[i], y_test[i])
+            error = self.forward(x=x_test[i], y=y_test[i])
             result.append(error)
         return result
 
@@ -67,16 +83,24 @@ class SANEAlgorithm(object):
         output = self.best_nn.forward(x)
         return mse(y, output)
 
-    def forward_train(self, neural_networks: List[NeuralNetwork], x_train: np.array, y_train: np.array):
+    def forward_train(self,
+                      neural_networks: List[NeuralNetwork],
+                      x_train: np.array,
+                      y_train: np.array):
         dataset_size = x_train.shape[0]
         for i in range(len(neural_networks)):
-            data_index = random.randrange(dataset_size)
-            output = neural_networks[i].forward(x_train[data_index])
-            error = mse(y_train[data_index], output)
-            neural_networks[i].fitness = error
-            self.blueprint_population[i].fitness = error
+            errors = []
+            for j in range(dataset_size):
+                output = neural_networks[i].forward(input_data=x_train[j])
+                error = mse(y_true=y_train[j], y_pred=output)
+                errors.append(error)
+            avg_error = np.array(errors).mean()
+            neural_networks[i].fitness = avg_error
+            self.blueprint_population[i].fitness = avg_error
 
-    def create_neural_networks(self, inputs_count: int, outputs_count: int) -> List[NeuralNetwork]:
+    def create_neural_networks(self,
+                               inputs_count: int,
+                               outputs_count: int) -> List[NeuralNetwork]:
         result = []
         for i in range(len(self.blueprint_population)):
             hidden_neurons = self.blueprint_population[i].neurons

@@ -4,7 +4,9 @@ from .neuron_population import NeuronPopulation
 
 
 class Blueprint(object):
-    def __init__(self, neurons: List[int], neuron_population: NeuronPopulation):
+    def __init__(self,
+                 neurons: List[int],
+                 neuron_population: NeuronPopulation):
         self.neurons = neurons
         self.neuron_population = neuron_population
         self.fitness = 0.0

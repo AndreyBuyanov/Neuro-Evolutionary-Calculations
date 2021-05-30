@@ -5,13 +5,16 @@ from .neuron_population import NeuronPopulation
 
 
 class BlueprintPopulation(object):
-    def __init__(self, population_size: int, blueprint_size: int):
+    def __init__(self,
+                 population_size:
+                 int, blueprint_size: int):
         self.population_size = population_size
         self.blueprint_size = blueprint_size
         self.neuron_population = None
         self.blueprints = []
 
-    def init(self, neuron_population: NeuronPopulation):
+    def init(self,
+             neuron_population: NeuronPopulation):
         self.neuron_population = neuron_population
         for i in range(self.population_size):
             selected_neurons = self.select_neurons()
@@ -41,7 +44,8 @@ class BlueprintPopulation(object):
             parent1 = self.blueprints[i]
             parent2 = self.blueprints[i + 1]
             child1, child2 = Blueprint.crossover(
-                parent1=parent1, parent2=parent2)
+                parent1=parent1,
+                parent2=parent2)
             child1.neuron_population = self.neuron_population
             child2.neuron_population = self.neuron_population
             selected1 = parent1 if random.randrange(2) == 0 else parent2

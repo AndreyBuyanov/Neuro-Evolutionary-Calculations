@@ -7,7 +7,11 @@ from .neuron_population import NeuronPopulation
 
 
 class NeuralNetwork(object):
-    def __init__(self, hidden_neurons: List[int], inputs_count: int, outputs_count: int, neuron_population: NeuronPopulation):
+    def __init__(self,
+                 hidden_neurons: List[int],
+                 inputs_count: int,
+                 outputs_count: int,
+                 neuron_population: NeuronPopulation):
         self.fitness = 0.0
         self.input_weights = np.zeros((len(hidden_neurons), inputs_count))
         output_weights = np.zeros((len(hidden_neurons), outputs_count))
@@ -18,12 +22,15 @@ class NeuralNetwork(object):
         for i in range(outputs_count):
             self.output_weights[i] = output_weights[:, i]
         self.layers = []
-        self.layers.append(
-            Layer(weights=self.input_weights, activation=Sigmoid()))
-        self.layers.append(
-            Layer(weights=self.output_weights, activation=Sigmoid()))
+        self.layers.append(Layer(
+            weights=self.input_weights,
+            activation=Sigmoid()))
+        self.layers.append(Layer(
+            weights=self.output_weights,
+            activation=Sigmoid()))
 
-    def forward(self, input_data: np.array) -> np.array:
+    def forward(self,
+                input_data: np.array) -> np.array:
         output = input_data
         for layer in self.layers:
             output = layer.forward(output)
