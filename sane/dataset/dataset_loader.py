@@ -6,7 +6,7 @@ def transform_data(dataset, inputs, outputs):
     input_data = np.zeros((len(dataset), inputs))
     output_data = np.zeros((len(dataset), outputs))
     for i in range(len(dataset)):
-        data = [float(value) for value in dataset[i].split(' ')]
+        data = [float(value) for value in dataset[i].split()]
         input_data[i] = data[:inputs]
         output_data[i] = data[inputs:]
     return input_data, output_data
