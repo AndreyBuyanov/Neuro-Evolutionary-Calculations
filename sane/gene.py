@@ -81,7 +81,7 @@ class Gene(object):
             value=0.0,
             min_value=min_value,
             max_value=max_value,
-            precision=16)
+            precision=32)
 
     def get_connection_type(self) -> ConnectionType:
         return ConnectionType.from_label(self.label)
