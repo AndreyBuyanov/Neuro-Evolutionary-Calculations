@@ -1,6 +1,5 @@
 from typing import List
 import numpy as np
-from .neuron import Neuron
 from .layer import Layer
 from .activations import Sigmoid
 from .neuron_population import NeuronPopulation
