@@ -94,3 +94,124 @@ class Glass2Dataset(AbstractDataset):
 class Glass3Dataset(AbstractDataset):
     def __init__(self):
         super().__init__(os.path.dirname(__file__) + '/data/glass3.dt')
+
+
+class Card1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/card1.dt')
+
+
+class Card2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/card2.dt')
+
+
+class Card3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/card3.dt')
+
+
+class Flare1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/flare1.dt')
+
+
+class Flare2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/flare2.dt')
+
+
+class Flare3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/flare3.dt')
+
+
+class Gene1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/gene1.dt')
+
+
+class Gene2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/gene2.dt')
+
+
+class Gene3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/gene3.dt')
+
+
+class Heart1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/heart1.dt')
+
+
+class Heart2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/heart2.dt')
+
+
+class Heart3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/heart3.dt')
+
+
+class Horse1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/horse1.dt')
+
+
+class Horse2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/horse2.dt')
+
+
+class Horse3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/horse3.dt')
+
+
+class Mushroom1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/mushroom1.dt')
+
+
+class Mushroom2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/mushroom2.dt')
+
+
+class Mushroom3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/mushroom3.dt')
+
+
+class Soybean1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/soybean1.dt')
+
+
+class Soybean2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/soybean2.dt')
+
+
+class Soybean3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/soybean3.dt')
+
+
+class Thyroid1Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/thyroid1.dt')
+
+
+class Thyroid2Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/thyroid2.dt')
+
+
+class Thyroid3Dataset(AbstractDataset):
+    def __init__(self):
+        super().__init__(os.path.dirname(__file__) + '/data/thyroid3.dt')
+
