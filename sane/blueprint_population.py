@@ -16,7 +16,7 @@ class BlueprintPopulation(object):
     def init(self,
              neuron_population: NeuronPopulation):
         self.neuron_population = neuron_population
-        for i in range(self.population_size):
+        for _ in range(self.population_size):
             selected_neurons = self.select_neurons()
             self.blueprints.append(Blueprint(
                 neurons=selected_neurons,
@@ -25,7 +25,7 @@ class BlueprintPopulation(object):
     def select_neurons(self) -> List[int]:
         result = []
         while True:
-            for i in range(self.blueprint_size):
+            for _ in range(self.blueprint_size):
                 result.append(random.randrange(len(self.neuron_population)))
             if len(set(result)) == self.blueprint_size:
                 break
@@ -33,8 +33,8 @@ class BlueprintPopulation(object):
         return result
 
     def mutation(self):
-        for i in range(len(self.blueprints)):
-            self.blueprints[i].mutation()
+        for blueprint in self.blueprints:
+            blueprint.mutation()
 
     def crossover(self):
         self.blueprints.sort(key=lambda x: x.fitness)

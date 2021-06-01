@@ -27,24 +27,20 @@ def invert_bit(value: int, bit: int, precision: int):
 
 class IntegerGene(object):
     def __init__(self, value: float, min_value: float, max_value: float, precision: int):
-        self.float_value = value
+        self.value = value
         self.min_value = min_value
         self.max_value = max_value
         self.precision = precision
 
     def init(self):
-        self.float_value = random.uniform(self.min_value, self.max_value)
+        self.value = random.uniform(self.min_value, self.max_value)
 
     def get_int_value(self) -> int:
-        return int((self.float_value - self.min_value) * (2**self.precision - 1) / (self.max_value - self.min_value))
+        return int((self.value - self.min_value) * (2**self.precision - 1) / (self.max_value - self.min_value))
 
     def set_int_value(self, int_value: int):
-        self.float_value = int_value * (self.max_value - self.min_value) / (2**self.precision - 1) + self.min_value
+        self.value = int_value * (self.max_value - self.min_value) / (2**self.precision - 1) + self.min_value
     int_value = property(get_int_value, set_int_value)
-
-    def get_value(self) -> float:
-        return self.float_value
-    value = property(get_value)
 
     def mutation(self):
         mutation_bit = random.randrange(self.precision)

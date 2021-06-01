@@ -14,8 +14,8 @@ class NeuronPopulation(object):
     def init(self,
              min_value: float,
              max_value: float):
-        for i in range(len(self.neurons)):
-            self.neurons[i].init(
+        for neuron in self.neurons:
+            neuron.init(
                 min_value=min_value,
                 max_value=max_value)
 

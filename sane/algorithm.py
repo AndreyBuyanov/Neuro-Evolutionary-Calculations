@@ -1,10 +1,11 @@
 from typing import List
 import numpy as np
 import platform
+import os
 from copy import deepcopy
 from .neuron_population import NeuronPopulation
 from .blueprint_population import BlueprintPopulation
-from .nn import NeuralNetwork
+from .neural_network import NeuralNetwork
 from .utils import mse
 
 
@@ -65,6 +66,7 @@ class SANEAlgorithm(object):
             self.blueprint_population.mutation()
             print('{}{}/{} best fitness = {}, current fitness = {}'
                   .format(CRLF, generation, generations_count, self.best_nn.fitness, best_nn.fitness), end='')
+        print(os.linesep)
         return result
 
     def test(self,
@@ -102,8 +104,8 @@ class SANEAlgorithm(object):
                                inputs_count: int,
                                outputs_count: int) -> List[NeuralNetwork]:
         result = []
-        for i in range(len(self.blueprint_population)):
-            hidden_neurons = self.blueprint_population[i].neurons
+        for population in self.blueprint_population:
+            hidden_neurons = population.neurons
             result.append(NeuralNetwork(
                 hidden_neurons=hidden_neurons,
                 inputs_count=inputs_count,
@@ -112,11 +114,11 @@ class SANEAlgorithm(object):
         return result
 
     def update_neuron_fitness(self):
-        for i in range(len(self.neuron_population)):
+        for neuron in self.neuron_population:
             fitness_list = []
-            for j in range(len(self.blueprint_population)):
-                if i in self.blueprint_population[j].neurons:
-                    fitness_list.append(self.blueprint_population[j].fitness)
+            for population in self.blueprint_population:
+                if neuron in population.neurons:
+                    fitness_list.append(population.fitness)
                 if len(fitness_list) == 5:
                     break
-            self.neuron_population[i].fitness = np.array(fitness_list).mean() if len(fitness_list) > 0 else 0.0
+            neuron.fitness = np.array(fitness_list).mean() if len(fitness_list) > 0 else 0.0
