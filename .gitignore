@@ -1,1 +1,5 @@
 /.idea
+/target
+/.vscode
+/sane/__pycache__
+/sane/dataset/__pycache__
