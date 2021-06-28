@@ -1,0 +1,4854 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style russian
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\align center
+
+\size large
+Министерство науки и высшего образования Российской Федерации
+\end_layout
+
+\begin_layout Standard
+\align center
+федеральное государственное автономное образовательное учреждение высшего
+ образования 
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+«НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ ТОМСКИЙ ПОЛИТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ» 
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size small
+Инженерная школа информационных технологий и робототехники
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size small
+Отделение информационных технологий
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size small
+Направление «Информатика и вычислительная техника»
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 3cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+\size large
+Индивидуальное задание по дисциплине
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+\begin_inset Quotes rld
+\end_inset
+
+Нейроэволюционнные вычисления
+\begin_inset Quotes rrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1.8cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+Реализация алгоритма SANE
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 4cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+Выполнил:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+Студент группы 8ВМ03
+\begin_inset space \hfill{}
+\end_inset
+
+А.
+ А.
+ Буянов
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+Проверил:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+Ассистент ОИТ
+\begin_inset space \hfill{}
+\end_inset
+
+Д.
+ С.
+ Григорьев
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Томск - 2021
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size small
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Реализация алгоритма
+\end_layout
+
+\begin_layout Standard
+\align block
+Алгоритм SANE является вариантом коэволюционного алгоритма для эволюции
+ весов и структуры нейронной сети.
+ В алгоритме используется нейронная сеть с одним скрытым слоем.
+ В хромосоме кодируется список связей нейрона и веса связей.
+ Алгоритм вводит понятие комбинации нейронной сети - это набор нейронов,
+ представляющих одну нейронную сеть.
+ В алгоритме используются две популяции: популяция нейронов и популяция
+ комбинаций нейронов.
+ Данные популяции взаимодействуют независимо друг от друга, т.
+ к.
+ представляют разные сущности.
+\end_layout
+
+\begin_layout Standard
+В данной работе используется модифицированный алгоритм SANE: вес кодируется
+ с помощью вещественного кодирования.
+\end_layout
+
+\begin_layout Standard
+Рассмотрим основные классы, учавствующие в реализации алгоритма.
+\end_layout
+
+\begin_layout Subsection
+Класс RealGene
+\end_layout
+
+\begin_layout Standard
+Класс RealGene реализует логику работы с одним геном, использующим вещественное
+ кодирование.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+value - вещественное значение гена
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+value - значение гена
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+init - инициализация векторов входных и выходных весов случайными значениями;
+ параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+min_value - минимальное случайно сгенерированное число
+\end_layout
+
+\begin_layout Enumerate
+max_value - максимальное случайно сгенерированное число
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+mutation - мутация векторов весов, используется распределение Гаусса в окресност
+и значения гена
+\end_layout
+
+\begin_layout Enumerate
+crossover - скрещивание двух нейронов, используется скрещивание смешением
+ (Blend crossover); в качестве результата возвращаются два новых нейрона;
+ параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+parent1 - первый родитель
+\end_layout
+
+\begin_layout Enumerate
+parent2 - второй родитель
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Для скрещивания используется дополнительная функция crossover_real, принимающая
+ в качестве параметров два вещественных значения родительских генов и возвращающ
+ая два вещественных значения дочерних генов.
+\end_layout
+
+\begin_layout Subsection
+Класс Gene
+\end_layout
+
+\begin_layout Standard
+Класс Gene реализует логику работы с одним геном, хранящим вес и структуру
+ нейрона.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+label - целочисленное значение, хранящее направление связи (входная или
+ выходная) и индекс нейрона, с которым установлена связь
+\end_layout
+
+\begin_layout Enumerate
+weight - вес связи, объект класса RealGene
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор, происходит инициализация полей нулевыми значениями;
+\end_layout
+
+\begin_layout Enumerate
+get_connection_type - метод возвращает направление соединения, при этом,
+ если поле label > 127, то нейрон выходной, иначе входной
+\end_layout
+
+\begin_layout Enumerate
+get_index - метод возвращает индекс нейрона; индекс вычисляется по следующей
+ формуле label mod N, где N - общее количество нейронов в скрытом слое
+\end_layout
+
+\begin_layout Enumerate
+get_weight - метод возвращает вес связи
+\end_layout
+
+\begin_layout Enumerate
+init - инициализация полей случайными значениями; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+min_value - минимальное случайно сгенерированное число
+\end_layout
+
+\begin_layout Enumerate
+max_value - максимальное случайно сгенерированное число
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+mutation - мутация весов и меток; для метки используется инвертирование
+ бита; для веса вызывается метод mutation класса RealGene
+\end_layout
+
+\begin_layout Enumerate
+crossover - скрещивание двух генов; для метки используется одноточечный
+ кроссинговер; для веса вызывается метод crossover класса RealGene; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+parent1 - первый родитель
+\end_layout
+
+\begin_layout Enumerate
+parent2 - второй родитель
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Исходный код классов RealGene и Gene представлены в листинге 1.
+\end_layout
+
+\begin_layout Standard
+Листинг 1.
+ Исходный код классов RealGene и Gene.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from enum import Enum 
+\end_layout
+
+\begin_layout Plain Layout
+
+import random
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class ConnectionType(Enum):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	INPUT = 1     
+\end_layout
+
+\begin_layout Plain Layout
+
+	OUTPUT = 2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @classmethod     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def from_label(cls, label: int):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return cls(cls.OUTPUT if label > (2**7 - 1) else cls.INPUT)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def crossover_integer(
+\end_layout
+
+\begin_layout Plain Layout
+
+	parent1: int, parent2: 
+\end_layout
+
+\begin_layout Plain Layout
+
+	int, precision: int):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	crossover_point = random.randrange(precision)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	mask1 = ((2 ** precision - 1) << crossover_point) 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		& (2 ** precision - 1)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	mask2 = ((2 ** precision - 1) >> (precision - crossover_point)) 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		& (2 ** precision - 1)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	child1 = (parent1 & mask1) | (parent2 & mask2)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	child2 = (parent2 & mask1) | (parent1 & mask2)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	return child1, child2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def crossover_real(
+\end_layout
+
+\begin_layout Plain Layout
+
+	parent1: float, 
+\end_layout
+
+\begin_layout Plain Layout
+
+	parent2: float, 
+\end_layout
+
+\begin_layout Plain Layout
+
+	blend=0.1):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	child1 = parent1 - blend * (parent2 - parent1)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	child2 = parent2 + blend * (parent2 - parent1)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	return child1, child2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def invert_bit(
+\end_layout
+
+\begin_layout Plain Layout
+
+	value: int, 
+\end_layout
+
+\begin_layout Plain Layout
+
+	bit: int, 
+\end_layout
+
+\begin_layout Plain Layout
+
+	precision: int):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	mask = (1 << bit) & (2 ** precision - 1)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	return value ^ mask
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class RealGene(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		value: float):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.value = value
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def init(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		min_value: float,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		max_value: float):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.value = random.uniform(min_value, max_value)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mutation(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.value = random.gauss(mu=self.value, sigma=0.1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @staticmethod     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def crossover(parent1, parent2):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1_gene, child2_gene = crossover_real(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent1=parent1.value,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent2=parent2.value)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1 = RealGene(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			value=child1_gene)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child2 = RealGene(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			value=child2_gene)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return child1, child2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Gene(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.label = 0         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.weight = RealGene(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			value=0.0)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_connection_type(self) -> ConnectionType:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return ConnectionType.from_label(self.label)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_index(self, neurons_count) -> int:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.label % neurons_count
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_weight(self) -> float:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.weight.value
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	def init(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		min_value: float,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		max_value: float):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.label = int(random.random() * (2**8 - 1))         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.weight.init(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			min_value=min_value,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			max_value=max_value)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	def mutation(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		if random.random() <= 0.01:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			mutation_bit = random.randrange(8)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.label = invert_bit(self.label, mutation_bit, 8)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.weight.mutation()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	@staticmethod     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def crossover(parent1, parent2):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1 = Gene()         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child2 = Gene()         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1.label, child2.label = crossover_integer(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent1=parent1.label,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent2=parent2.label,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			precision=8)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1.weight, child2.weight = RealGene.crossover(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent1=parent1.weight,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent2=parent2.weight)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return child1, child2 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс Neuron
+\end_layout
+
+\begin_layout Standard
+Класс Neuron реализует логику работы с нейроном.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+genes - массив, храняший гены (объекты класса Gene)
+\end_layout
+
+\begin_layout Enumerate
+connections_count - количество соединений в одном нейроне (в данном алгоритме
+ подразумевается, что сеть может быть не полносвязной)
+\end_layout
+
+\begin_layout Enumerate
+fitness - приспособленность нейрона
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+connections_count - количество соединений в одном нейроне
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+init - инициализация нейрона.
+ Инициализация происходит в цикле, в котором создаются гены со случайными
+ значениями полей и в конце итерации проверяется, что гены имеют разные
+ направления соединений.
+ Это необходимо для того, чтобы не получился нейрон, имеющий связи одного
+ направления, поскольку такая конфигурация нейрона не будет иметь смысла.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+min_value - минимальное случайно сгенерированное число
+\end_layout
+
+\begin_layout Enumerate
+max_value - максимальное случайно сгенерированное число
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+get_weights - получение вектора весов из генов соответствующего направления;
+ параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+neurons_count - количество нейронов в скрытом слое (необходимо для вычисления
+ индекса нейрона входного, либо выходного слоёв)
+\end_layout
+
+\begin_layout Enumerate
+connection - направление соединения
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+get_input_weights - получение вектора весов входных соединений скрытого
+ слоя; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+neurons_count - количество нейронов в скрытом слое
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+get_output_weights - получение вектора весов выходных соединений скрытого
+ слоя; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+neurons_count - количество нейронов в скрытом слое
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+mutation - мутация генов.
+ Вызывается метод mutation класса Gene для каждого гена
+\end_layout
+
+\begin_layout Enumerate
+crossover - скрещивание двух нейронов.
+ Вызывается метод mutation класса Gene для каждого гена.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+parent1 - первый родитель
+\end_layout
+
+\begin_layout Enumerate
+parent2 - второй родитель
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Исходный код класса предсатвлен в листинге 2.
+\end_layout
+
+\begin_layout Standard
+Листинг 2.
+ Исходный код класса Neuron.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import numpy as np
+\end_layout
+
+\begin_layout Plain Layout
+
+from .gene import Gene, ConnectionType
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Neuron(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		connections_count: int):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.genes = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.connections_count = connections_count         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.fitness = 0.0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def init(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		min_value: float,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		max_value: float):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		while True:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			for i in range(self.connections_count):                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				self.genes.append(Gene())             
+\end_layout
+
+\begin_layout Plain Layout
+
+			for i in range(self.connections_count):                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				self.genes[i].init(                     
+\end_layout
+
+\begin_layout Plain Layout
+
+					min_value=min_value,                     
+\end_layout
+
+\begin_layout Plain Layout
+
+					max_value=max_value)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			connection_types = [connection.get_connection_type().value 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				for connection in self.genes]             
+\end_layout
+
+\begin_layout Plain Layout
+
+			if len(set(connection_types)) > 1:                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				break             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.genes.clear()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_weights(self,                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		neurons_count: int,                     
+\end_layout
+
+\begin_layout Plain Layout
+
+		connection: ConnectionType) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		result = np.zeros(neurons_count)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for gene in self.genes:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			if gene.get_connection_type() == connection:                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				result[gene.get_index(neurons_count)] = gene.get_weight()         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return result
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_input_weights(self,                           
+\end_layout
+
+\begin_layout Plain Layout
+
+		neurons_count: int) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.get_weights(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neurons_count=neurons_count,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			connection=ConnectionType.INPUT)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_output_weights(self,                            
+\end_layout
+
+\begin_layout Plain Layout
+
+		neurons_count: int) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.get_weights(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neurons_count=neurons_count,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			connection=ConnectionType.OUTPUT)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mutation(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(len(self.genes)):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.genes[i].mutation()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @staticmethod     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def crossover(parent1, parent2):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		genes_count = len(parent1.genes)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		connections_count = parent1.connections_count         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1 = Neuron(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			connections_count=connections_count)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child2 = Neuron(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			connections_count=connections_count)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(genes_count):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child1_gene, child2_gene = Gene.crossover(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				parent1=parent1.genes[i],                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				parent2=parent2.genes[i])             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child1.genes.append(child1_gene)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child2.genes.append(child2_gene)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return child1, child2 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс NeuronPopulation
+\end_layout
+
+\begin_layout Standard
+Класс NeuronPopulation - реализует логику работы с популяцией нейронов,
+ предоставляя высокоуровневый интерфейс над массивом нейронов.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+neurons - массив нейронов
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор.
+ В конструкторе происходит создание нейронов.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+min_value - минимальное случайно сгенерированное число
+\end_layout
+
+\begin_layout Enumerate
+max_value - максимальное случайно сгенерированное число
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+init - инициализация популяции нейронов.
+ Для каждого нейрона вызывается метод init, в который передаются параметры
+ метода.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+min_value - минимальное случайно сгенерированное число
+\end_layout
+
+\begin_layout Enumerate
+max_value - максимальное случайно сгенерированное число
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+crossover - скрещивание верхней четверти лучших нейронов
+\end_layout
+
+\begin_layout Enumerate
+mutation - мутация всех нейронов
+\end_layout
+
+\begin_layout Enumerate
+__getitem__ - встроенный метод языка Python, позволяющий обращаться к данному
+ объекту как к коллекции.
+ При этом возвращается соответствующий индексу нейрон
+\end_layout
+
+\begin_layout Enumerate
+__len__ - встроенный метод языка Python, позволяющий получить размер коллекции.
+ При этом возвращается размер массива нейронов
+\end_layout
+
+\begin_layout Standard
+Исходный код класса представлен в листинге 3.
+\end_layout
+
+\begin_layout Standard
+Листинг 3.
+ Исходный код класса NeuronPopulation
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import random 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .neuron import Neuron
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class NeuronPopulation(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		population_size: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		connections_count: int):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neurons = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(population_size):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.neurons.append(Neuron(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				connections_count=connections_count))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def init(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		min_value: float,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		max_value: float):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for neuron in self.neurons:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neuron.init(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				min_value=min_value,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				max_value=max_value)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def crossover(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neurons.sort(key=lambda x: x.fitness)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		selected_neuron_count = int(len(self.neurons) / 4)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		selected_neuron_count -= selected_neuron_count % 2         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(0, selected_neuron_count, 2):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent1 = self.neurons[i]             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent2 = self.neurons[i + 1]             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child1, child2 = Neuron.crossover(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				parent1=parent1,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				parent2=parent2)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			selected1 = parent1 if random.randrange(2) == 0 else parent2         
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+			selected2 = child1 if random.randrange(2) == 0 else child2
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.neurons[-selected_neuron_count + i] = selected1             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.neurons[-selected_neuron_count + i + 1] = selected2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mutation(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(len(self.neurons)):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.neurons[i].mutation()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __getitem__(self, key: int) -> Neuron:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.neurons[key]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __len__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return len(self.neurons) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс Blueprint
+\end_layout
+
+\begin_layout Standard
+Класс Blueprint - реализует логику работы с комбинацией нейронов.
+ Комбинация рассматривается как отдельная особь.
+ Массив индексов нейронов является хромосомой.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+neurons - массив индексов нейронов
+\end_layout
+
+\begin_layout Enumerate
+neuron_population - популяция нейронов (указатель на популяцию нейронов,
+ поскольку данный объект не должен владеть популяцией)
+\end_layout
+
+\begin_layout Enumerate
+fitness - значение приспособленности данной комбинации
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор.
+ В конструкторе происходит создание нейронов.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+neurons - массив индексов нейронов
+\end_layout
+
+\begin_layout Enumerate
+neuron_population - популяция нейронов
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+mutation - мутация комбинации.
+ В результате мутации происходит замена случайно выбранного нейрона в текущей
+ комбинации на случайно выбранный нейрон из популяции нейронов
+\end_layout
+
+\begin_layout Enumerate
+crossover - скрещивание.
+ Скрещиваются массивы индексов нейронов.
+ Применяется одноточечный кроссинговер
+\end_layout
+
+\begin_layout Standard
+Исходный код класса представлен в листинге 4.
+\end_layout
+
+\begin_layout Standard
+Листинг 4.
+ Исходный код класса Blueprint
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from typing import List 
+\end_layout
+
+\begin_layout Plain Layout
+
+import random 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .neuron_population import NeuronPopulation
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Blueprint(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		neurons: List[int],                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		neuron_population: NeuronPopulation):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neurons = neurons         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neuron_population = neuron_population         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.fitness = 0.0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mutation(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		if random.random() <= 0.01:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			new_neuron_index = random.randrange(len(self.neuron_population))
+\end_layout
+
+\begin_layout Plain Layout
+
+			neuron_index = random.randrange(len(self.neurons))
+\end_layout
+
+\begin_layout Plain Layout
+
+            self.neurons[neuron_index] = new_neuron_index
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @staticmethod     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def crossover(parent1, parent2):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		neurons_count = len(parent1.neurons)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		crossover_point = random.randrange(neurons_count)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child1_neurons = parent1.neurons[:crossover_point]
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			+ parent2.neurons[crossover_point:]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		child2_neurons = parent2.neurons[:crossover_point]
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			+ parent1.neurons[crossover_point:]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return Blueprint(child1_neurons, None), Blueprint(child2_neurons, None)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс BlueprintPopulation
+\end_layout
+
+\begin_layout Standard
+Класс BlueprintPopulation - реализует логику работы с популяцией комбинаций
+ нейронов, предоставляя высокоуровневый интерфейс над массивом комбинаций
+ нейронов.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+population_size - размер популяции (количество комбинаций в популяции)
+\end_layout
+
+\begin_layout Enumerate
+blueprint_size - размер комбинации нейронов (количество нейронов в комбинации).
+ Должен быть равен количеству нейронов в скрытом слое
+\end_layout
+
+\begin_layout Enumerate
+neuron_population - популяция нейронов
+\end_layout
+
+\begin_layout Enumerate
+blueprints - массив комбинаций нейронов
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор; параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+population_size - размер популяции
+\end_layout
+
+\begin_layout Enumerate
+blueprint_size - размер комбинации нейронов
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+init - инициализация популяции комбинаций нейронов.
+ Происходит создание комбинаций нейронов.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+neuron_population - популяция нейронов
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+select_neurons - внутренний метод, возвращающий список индексов случайно
+ выбранных нейронов из популяции нейронов.
+ При этом индексы являются уникальными
+\end_layout
+
+\begin_layout Enumerate
+crossover - скрещивание верхней четверти лучших комбинаций нейронов.
+ Для скрещивания вызывается метод crossover класса Blueprint.
+ Потомки при этом заменяют худшие особи
+\end_layout
+
+\begin_layout Enumerate
+mutation - мутация всех комбинаций нейронов
+\end_layout
+
+\begin_layout Enumerate
+__getitem__ - встроенный метод языка Python, позволяющий обращаться к данному
+ объекту как к коллекции.
+ При этом возвращается соответствующий индексу нейрон
+\end_layout
+
+\begin_layout Enumerate
+__len__ - встроенный метод языка Python, позволяющий получить размер коллекции.
+ При этом возвращается размер массива нейронов
+\end_layout
+
+\begin_layout Enumerate
+__iter__ - встроенный метод языка Python, позволяющий итерироваться по объекту.
+ Итерация происходит по массиву комбинаций нйронов
+\end_layout
+
+\begin_layout Standard
+Исходный код класса представлен в листинге 5.
+\end_layout
+
+\begin_layout Standard
+Листинг 5.
+ Исходный код класса NeuronPopulation
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from typing import List 
+\end_layout
+
+\begin_layout Plain Layout
+
+import random 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .blueprint import Blueprint 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .neuron_population import NeuronPopulation
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class BlueprintPopulation(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		population_size: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		blueprint_size: int):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.population_size = population_size         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.blueprint_size = blueprint_size         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neuron_population = None         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.blueprints = []
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def init(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		neuron_population: NeuronPopulation):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neuron_population = neuron_population         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for _ in range(self.population_size):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			selected_neurons = self.select_neurons()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.blueprints.append(Blueprint(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				neurons=selected_neurons,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				neuron_population=self.neuron_population))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def select_neurons(self) -> List[int]:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		result = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		while True:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			for _ in range(self.blueprint_size):
+\end_layout
+
+\begin_layout Plain Layout
+
+                result.append(random.randrange(len(self.neuron_population)))
+             
+\end_layout
+
+\begin_layout Plain Layout
+
+			if len(set(result)) == self.blueprint_size:                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				break             
+\end_layout
+
+\begin_layout Plain Layout
+
+			result.clear()         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return result
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mutation(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for blueprint in self.blueprints:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			blueprint.mutation()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def crossover(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.blueprints.sort(key=lambda x: x.fitness)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		selected_blueprint_count = int(len(self.blueprints) / 4)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		selected_blueprint_count -= selected_blueprint_count % 2         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(0, selected_blueprint_count, 2):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent1 = self.blueprints[i]             
+\end_layout
+
+\begin_layout Plain Layout
+
+			parent2 = self.blueprints[i + 1]             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child1, child2 = Blueprint.crossover(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				parent1=parent1,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				parent2=parent2)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child1.neuron_population = self.neuron_population             
+\end_layout
+
+\begin_layout Plain Layout
+
+			child2.neuron_population = self.neuron_population             
+\end_layout
+
+\begin_layout Plain Layout
+
+			selected1 = parent1 if random.randrange(2) == 0 else parent2         
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+			selected2 = child1 if random.randrange(2) == 0 else child2           
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.blueprints[-selected_blueprint_count + i] = selected1           
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.blueprints[-selected_blueprint_count + i + 1] = selected2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __getitem__(self, key: int) -> Blueprint:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.blueprints[key]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __len__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return len(self.blueprints)
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __iter__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return iter(self.blueprints) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Классы функций активации
+\end_layout
+
+\begin_layout Standard
+Базовым классом для всех функций активации является класс AbstractActivationFunc
+tion, представляющий интерфейс для работы с функциями активации.
+ В данном классе имеется метод forward, который принимает на вход numpy-массив
+ (вектор), применяет к каждому элементу функцию активации и возвращает numpy-мас
+сив.
+ Дочерние классы должны реализовать данный метод.
+\end_layout
+
+\begin_layout Standard
+Имеется реализация нескольких функций активации.
+ Исходный код классов представлен в листинге 4.
+\end_layout
+
+\begin_layout Standard
+Листинг 6.
+ Исходный код классов функций активации.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import numpy as np
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class AbstractActivationFunction(object):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def forward(self, input_data: np.array) -> np.array:
+\end_layout
+
+\begin_layout Plain Layout
+
+        raise NotImplementedError()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Sigmoid(AbstractActivationFunction):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def forward(self, input_data: np.array) -> np.array:
+\end_layout
+
+\begin_layout Plain Layout
+
+        return 1.0 / (1.0 + np.exp(-input_data))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class ReLU(AbstractActivationFunction):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	def forward(self, input_data: np.array) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return np.maximum(0.0, input_data)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Tanh(AbstractActivationFunction):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def forward(self, input_data: np.array) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return np.tanh(input_data) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс Layer
+\end_layout
+
+\begin_layout Standard
+Класс Layer реализует логику работы со слоем нейронной сети.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+weights - матрица весов слоя
+\end_layout
+
+\begin_layout Enumerate
+activation - функция активации (объект класса AbstractActivationFunction)
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор, параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+weights - матрица весов
+\end_layout
+
+\begin_layout Enumerate
+activation - функция активации
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+forward - прямой проход по слою.
+ Матрица весов умножатеся на вектор-столбец входных данных, к каждому элементу
+ полученного вектор-стобца применяется функция активации.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+input_data - вектор входных данных
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Исходный код класса представлен в листинге 7.
+\end_layout
+
+\begin_layout Standard
+Листинг 7.
+ Исходный код класса Layer.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import numpy as np from .activations import AbstractActivationFunction
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Layer(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		weights: np.array,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		activation: AbstractActivationFunction):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.weights = weights         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.activation = activation
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def forward(self,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+		input_data: np.array) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.activation.forward(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			input_data=np.dot(self.weights, input_data)) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс NeuralNetwork
+\end_layout
+
+\begin_layout Standard
+Класс NeuralNetwork реализует логику работы с нейронной сетью.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+fitness - приспособленность нейронной сети
+\end_layout
+
+\begin_layout Enumerate
+input_weights - матрица входных весов скрытого слоя
+\end_layout
+
+\begin_layout Enumerate
+output_weights - матрица выходных весов скрытого слоя (входных весов выходного
+ слоя)
+\end_layout
+
+\begin_layout Enumerate
+layers - список, содержащий слои нейронной сети (объекты класса Layer)
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор.
+ Происходит инициализация весов нейронной сети и создание скрытого и выходного
+ слоёв сети.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+hidden_neurons - массив индексов нейронов, из которых будет построен скрытый
+ слой
+\end_layout
+
+\begin_layout Enumerate
+inputs_count - количество входов нейронной сети
+\end_layout
+
+\begin_layout Enumerate
+outputs_count - количество выходов нейронной сети
+\end_layout
+
+\begin_layout Enumerate
+neuron_population - популяция нейронов, из которой будет происходить выборка
+ нейронов
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+forward - прямой проход по сети.
+ Последовательно выполняется прямой проход по слоям сети с помощью метода
+ forward класса Layer.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+input_data - вектор входных данных
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Исходный код класса представлен в листинге 8.
+\end_layout
+
+\begin_layout Standard
+Листинг 8.
+ Исходный код класса NeuralNetwork.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from typing import List 
+\end_layout
+
+\begin_layout Plain Layout
+
+import numpy as np 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .layer import Layer 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .activations import Sigmoid 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .neuron_population import NeuronPopulation
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class NeuralNetwork(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		hidden_neurons: List[int],                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		inputs_count: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		outputs_count: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		neuron_population: NeuronPopulation):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.fitness = 0.0         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.input_weights = np.zeros((len(hidden_neurons), inputs_count))     
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+		output_weights = np.zeros((len(hidden_neurons), outputs_count))       
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(len(hidden_neurons)):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.input_weights[i] = neuron_population[hidden_neurons[i]]
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				.get_input_weights(inputs_count)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			output_weights[i] = neuron_population[hidden_neurons[i]]
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				.get_output_weights(outputs_count)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.output_weights = np.zeros((outputs_count, len(hidden_neurons)))   
+      
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(outputs_count):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.output_weights[i] = output_weights[:, i]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.layers = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.layers.append(Layer(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			weights=self.input_weights,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			activation=Sigmoid()))         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.layers.append(Layer(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			weights=self.output_weights,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			activation=Sigmoid()))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	def forward(self, 
+\end_layout
+
+\begin_layout Plain Layout
+
+		input_data: np.array) -> np.array:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		output = input_data         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for layer in self.layers:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			output = layer.forward(output)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return output 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Класс SANEAlgorithm
+\end_layout
+
+\begin_layout Standard
+Класс SANEAlgorithm реализует логику работы с алгоритмом SANE.
+ Имеются следующие поля:
+\end_layout
+
+\begin_layout Enumerate
+neuron_population - популяция нейронов
+\end_layout
+
+\begin_layout Enumerate
+blueprint_population - популяция комбинаций нейронов
+\end_layout
+
+\begin_layout Enumerate
+best_nn - лучшая нейронная сеть
+\end_layout
+
+\begin_layout Standard
+В классе имеются следующие методы:
+\end_layout
+
+\begin_layout Enumerate
+__init__ - конструктор.
+ Происходит создание популяции нейронов и популяции комбинаций нейронов.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+blueprints_population_size - размер популяции комбинаций нейронов
+\end_layout
+
+\begin_layout Enumerate
+neuron_population_size - размер популяции нейронов
+\end_layout
+
+\begin_layout Enumerate
+hidden_layer_size - количество нейронов в скрытом слое
+\end_layout
+
+\begin_layout Enumerate
+connections_count - количество соединений для одного нейрона
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+init - инициализация популяции нейронов и популяции комбинаций нейронов,
+ параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+min_value - минимальное случайно сгенерированное число
+\end_layout
+
+\begin_layout Enumerate
+max_value - максимальное случайно сгенерированное число
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+train - тренировка нейронных сетей, параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+generations_count - количество поколений
+\end_layout
+
+\begin_layout Enumerate
+x_train - массив входных данных
+\end_layout
+
+\begin_layout Enumerate
+y_train - массив выходных данных
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+test - тестирование сети.
+ Возвращается массив среднеквадратичных ошибок в соответствии с записями
+ во входном наборе данных.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+x_train - массив входных данных
+\end_layout
+
+\begin_layout Enumerate
+y_train - массив выходных данных
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+forward - внутренний метод, предназначенный для прохода по лучшей нейронной
+ сети с одним набором данных.
+ Возвращает среднеквадратичную ошибку.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+x_train - вектор входных данных
+\end_layout
+
+\begin_layout Enumerate
+y_train - вектор выходных данных
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+forward_train - внутренний метод предназначенный для прохода всех комбинаций
+ нейронных сетей по всем входным данным.
+ По результатам прохода берётся среднее значение среднеквадратичных ошибок,
+ полученных в результате прохода всех данных.
+ Полученное значение является приспособленностью для нейронной сети и для
+ комбинации нейронной сети.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+neural_networks - масссив нейронных сетей
+\end_layout
+
+\begin_layout Enumerate
+x_train - массив входных данных
+\end_layout
+
+\begin_layout Enumerate
+y_train - массив выходных данных
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+create_neural_networks - внутренний метод, создающий массив нейронных сетей
+ из комбинаций нейронных сетей.
+ Параметры:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+inputs_count - количество входов нейронной сети
+\end_layout
+
+\begin_layout Enumerate
+outputs_count - количество выходов нейронной сети
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+update_neuron_fitness - внутренний метод, обновляющий приспособленность
+ нейронов, являющуюся средним значением приспособленности 5 лучших нейронных
+ сетей, включающих данный нейрон
+\end_layout
+
+\begin_layout Standard
+Рассмотрим подробнее работу алгоритма (метод train).
+ Сначала запускается цикл по количеству поколений.
+ В цикле сначала создаются нейронные сети с помощью метода create_neural_network
+s.
+ Затем, через созданные сети пропускается весь тестовый датасет.
+ Для этого используется метод forward_train.
+ После пропускания данных у нейронных сетей появится ненулевое значение
+ приспособленности, и нейронные сети сортируются по ней по возрастанию.
+ Таким образом в начале массива находятся лучшие нейронные сети.
+ Далее происходит скрещивание и мутация популяции нейронов, и затем скрещивание
+ и мутация популяции комбинаций нейронов.
+ Данные шаги повторяются заданное количество раз.
+\end_layout
+
+\begin_layout Standard
+Исходный код класса представлен в листинге 9.
+\end_layout
+
+\begin_layout Standard
+Листинг 9.
+ Исходный код класса SANEAlgorithm.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from typing import List 
+\end_layout
+
+\begin_layout Plain Layout
+
+import numpy as np 
+\end_layout
+
+\begin_layout Plain Layout
+
+import platform 
+\end_layout
+
+\begin_layout Plain Layout
+
+import os 
+\end_layout
+
+\begin_layout Plain Layout
+
+from copy import deepcopy 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .neuron_population import NeuronPopulation 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .blueprint_population import BlueprintPopulation 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .neural_network import NeuralNetwork 
+\end_layout
+
+\begin_layout Plain Layout
+
+from .utils import mse
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CRLF = '
+\backslash
+r
+\backslash
+x1B[K' if platform.system() != 'Windows' else '
+\backslash
+r'
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class SANEAlgorithm(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		blueprints_population_size: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		neuron_population_size: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		hidden_layer_size: int,                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		connections_count: int):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neuron_population = NeuronPopulation(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			population_size=neuron_population_size,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			connections_count=connections_count)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.blueprint_population = BlueprintPopulation(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			population_size=blueprints_population_size,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			blueprint_size=hidden_layer_size)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.best_nn = None
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def init(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		min_value: float,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		max_value: float):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.neuron_population.init(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			min_value=min_value,             
+\end_layout
+
+\begin_layout Plain Layout
+
+			max_value=max_value)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.blueprint_population.init(             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neuron_population=self.neuron_population)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def train(self,               
+\end_layout
+
+\begin_layout Plain Layout
+
+		generations_count: int,               
+\end_layout
+
+\begin_layout Plain Layout
+
+		x_train: np.array,               
+\end_layout
+
+\begin_layout Plain Layout
+
+		y_train: np.array):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		if x_train.shape[0] != y_train.shape[0]:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			raise Exception()         
+\end_layout
+
+\begin_layout Plain Layout
+
+		result = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for generation in range(generations_count):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			inputs_count = x_train[0].size             
+\end_layout
+
+\begin_layout Plain Layout
+
+			outputs_count = y_train[0].size             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neural_networks = self.create_neural_networks(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				inputs_count=inputs_count,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				outputs_count=outputs_count)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.forward_train(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				neural_networks=neural_networks,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				x_train=x_train,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				y_train=y_train)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neural_networks.sort(key=lambda x: x.fitness)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			best_nn = neural_networks[0]             
+\end_layout
+
+\begin_layout Plain Layout
+
+			if self.best_nn is None:                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				self.best_nn = deepcopy(best_nn)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			if best_nn.fitness < self.best_nn.fitness:                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				self.best_nn = deepcopy(best_nn)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			result.append(self.best_nn.fitness)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.update_neuron_fitness()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.neuron_population.crossover()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.neuron_population.mutation()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.blueprint_population.crossover()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.blueprint_population.mutation()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			print('{}{}/{} best fitness = {}, current fitness = {}'             
+      
+\end_layout
+
+\begin_layout Plain Layout
+
+				.format(CRLF, 
+\end_layout
+
+\begin_layout Plain Layout
+
+						generation, 
+\end_layout
+
+\begin_layout Plain Layout
+
+						generations_count, 
+\end_layout
+
+\begin_layout Plain Layout
+
+						self.best_nn.fitness, 
+\end_layout
+
+\begin_layout Plain Layout
+
+						best_nn.fitness), end='')         
+\end_layout
+
+\begin_layout Plain Layout
+
+		print(os.linesep)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return result
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def test(self,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		x_test: np.array,              
+\end_layout
+
+\begin_layout Plain Layout
+
+		y_test: np.array):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		if x_test.shape[0] != y_test.shape[0]:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			raise Exception()         
+\end_layout
+
+\begin_layout Plain Layout
+
+		dataset_size = x_test.shape[0]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		result = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(dataset_size):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			error = self.forward(x=x_test[i], y=y_test[i])             
+\end_layout
+
+\begin_layout Plain Layout
+
+			result.append(error)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return result
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def forward(self, 
+\end_layout
+
+\begin_layout Plain Layout
+
+		x: np.array, 
+\end_layout
+
+\begin_layout Plain Layout
+
+		y: np.array):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		output = self.best_nn.forward(x)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return mse(y, output)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def forward_train(self,                       
+\end_layout
+
+\begin_layout Plain Layout
+
+		neural_networks: List[NeuralNetwork],                       
+\end_layout
+
+\begin_layout Plain Layout
+
+		x_train: np.array,                       
+\end_layout
+
+\begin_layout Plain Layout
+
+		y_train: np.array):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		dataset_size = x_train.shape[0]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for i in range(len(neural_networks)):             
+\end_layout
+
+\begin_layout Plain Layout
+
+			errors = []             
+\end_layout
+
+\begin_layout Plain Layout
+
+			for j in range(dataset_size):                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				output = neural_networks[i].forward(
+\end_layout
+
+\begin_layout Plain Layout
+
+					input_data=x_train[j])                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				error = mse(y_true=y_train[j], y_pred=output)                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				errors.append(error)             
+\end_layout
+
+\begin_layout Plain Layout
+
+			avg_error = np.array(errors).mean()             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neural_networks[i].fitness = avg_error             
+\end_layout
+
+\begin_layout Plain Layout
+
+			self.blueprint_population[i].fitness = avg_error
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def create_neural_networks(self,                                
+\end_layout
+
+\begin_layout Plain Layout
+
+		inputs_count: int,                                
+\end_layout
+
+\begin_layout Plain Layout
+
+		outputs_count: int) -> List[NeuralNetwork]:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		result = []         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for population in self.blueprint_population:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			hidden_neurons = population.neurons             
+\end_layout
+
+\begin_layout Plain Layout
+
+			result.append(NeuralNetwork(                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				hidden_neurons=hidden_neurons,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				inputs_count=inputs_count,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				outputs_count=outputs_count,                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				neuron_population=self.neuron_population))         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return result
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def update_neuron_fitness(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for neuron in self.neuron_population:             
+\end_layout
+
+\begin_layout Plain Layout
+
+			fitness_list = []             
+\end_layout
+
+\begin_layout Plain Layout
+
+			for population in self.blueprint_population:                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				if neuron in population.neurons:                     
+\end_layout
+
+\begin_layout Plain Layout
+
+					fitness_list.append(population.fitness)                 
+\end_layout
+
+\begin_layout Plain Layout
+
+				if len(fitness_list) == 5:                     
+\end_layout
+
+\begin_layout Plain Layout
+
+					break             
+\end_layout
+
+\begin_layout Plain Layout
+
+			neuron.fitness = np.array(fitness_list).mean() 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				if len(fitness_list) > 0 else 0.0 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Классы для загрузки данных
+\end_layout
+
+\begin_layout Standard
+Представленные датасеты имеют схожую структуру.
+ В начале файла имеется заголовок, в котором указано количество входных
+ булевых и вещественных данных, и таких же выходных данных.
+ Далее следуют записи о количестве записей для тренировки, валидации и тестирова
+нии.
+ После заголовка следуют данные, значения которых разделены пробелами.
+ Таким образом можно создать универсальный загрузчик данных в виде одного
+ базового класса, задача которого - это непосредственно чтение данных, и
+ дочерних классов, представляющих отдельные датасеты.
+\end_layout
+
+\begin_layout Standard
+Исходный код классов представлен в листинге 10.
+\end_layout
+
+\begin_layout Standard
+Листинг 10.
+ Исходный код классов-загрузчиков данных.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import os 
+\end_layout
+
+\begin_layout Plain Layout
+
+import numpy as np
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def transform_data(dataset, inputs, outputs):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	input_data = np.zeros((len(dataset), inputs))     
+\end_layout
+
+\begin_layout Plain Layout
+
+	output_data = np.zeros((len(dataset), outputs))     
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i in range(len(dataset)):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		data = [float(value) for value in dataset[i].split()]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		input_data[i] = data[:inputs]         
+\end_layout
+
+\begin_layout Plain Layout
+
+		output_data[i] = data[inputs:]     
+\end_layout
+
+\begin_layout Plain Layout
+
+	return input_data, output_data
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+def load(path):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	with open(path, 'r') as f:         
+\end_layout
+
+\begin_layout Plain Layout
+
+		lines = f.readlines()
+\end_layout
+
+\begin_layout Plain Layout
+
+		bool_in = int(lines[0].split('=')[1])         
+\end_layout
+
+\begin_layout Plain Layout
+
+		real_in = int(lines[1].split('=')[1])         
+\end_layout
+
+\begin_layout Plain Layout
+
+		bool_out = int(lines[2].split('=')[1])         
+\end_layout
+
+\begin_layout Plain Layout
+
+		real_out = int(lines[3].split('=')[1])         
+\end_layout
+
+\begin_layout Plain Layout
+
+		training_examples_count = int(lines[4].split('=')[1])         
+\end_layout
+
+\begin_layout Plain Layout
+
+		validation_examples_count = int(lines[5].split('=')[1])         
+\end_layout
+
+\begin_layout Plain Layout
+
+		test_examples_count = int(lines[6].split('=')[1])
+\end_layout
+
+\begin_layout Plain Layout
+
+		inputs = bool_in + real_in         
+\end_layout
+
+\begin_layout Plain Layout
+
+		outputs = bool_out + real_out
+\end_layout
+
+\begin_layout Plain Layout
+
+        current_line = 7         
+\end_layout
+
+\begin_layout Plain Layout
+
+		train_x, train_y = transform_data(
+\end_layout
+
+\begin_layout Plain Layout
+
+			lines[current_line:current_line + training_examples_count], 
+\end_layout
+
+\begin_layout Plain Layout
+
+			inputs, 
+\end_layout
+
+\begin_layout Plain Layout
+
+			outputs)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		current_line += training_examples_count         
+\end_layout
+
+\begin_layout Plain Layout
+
+		validation_x, validation_y = transform_data(
+\end_layout
+
+\begin_layout Plain Layout
+
+			lines[current_line:current_line + validation_examples_count], 
+\end_layout
+
+\begin_layout Plain Layout
+
+			inputs, 
+\end_layout
+
+\begin_layout Plain Layout
+
+			outputs)         
+\end_layout
+
+\begin_layout Plain Layout
+
+		current_line += validation_examples_count         
+\end_layout
+
+\begin_layout Plain Layout
+
+		test_x, test_y = transform_data(
+\end_layout
+
+\begin_layout Plain Layout
+
+			lines[current_line:current_line + test_examples_count],
+\end_layout
+
+\begin_layout Plain Layout
+
+			inputs, 
+\end_layout
+
+\begin_layout Plain Layout
+
+			outputs)
+\end_layout
+
+\begin_layout Plain Layout
+
+        return train_x, train_y, validation_x, validation_y, test_x, test_y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class AbstractDataset(object):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self, path):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.train_x, self.train_y, 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.validation_x, self.validation_y, 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.test_x, self.test_y = load(path)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_train_data(self):        
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.train_x, self.train_y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_validation_data(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.validation_x, self.validation_y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_test_data(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		return self.test_x, self.test_y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Cancer1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/cancer1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Cancer2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/cancer2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Cancer3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/cancer3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Diabetes1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/diabetes1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Diabetes2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/diabetes2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Diabetes3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/diabetes3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Glass1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/glass1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Glass2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/glass2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Glass3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/glass3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Card1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/card1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Card2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/card2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Card3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/card3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Flare1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/flare1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Flare2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/flare2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Flare3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/flare3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Gene1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/gene1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Gene2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/gene2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Gene3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/gene3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Heart1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/heart1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Heart2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/heart2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Heart3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/heart3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Horse1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/horse1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Horse2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/horse2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Horse3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/horse3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Mushroom1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/mushroom1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Mushroom2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/mushroom2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Mushroom3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/mushroom3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Soybean1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/soybean1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Soybean2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/soybean2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Soybean3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/soybean3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Thyroid1Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/thyroid1.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Thyroid2Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/thyroid2.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Thyroid3Dataset(AbstractDataset):     
+\end_layout
+
+\begin_layout Plain Layout
+
+	def __init__(self):         
+\end_layout
+
+\begin_layout Plain Layout
+
+		super().__init__(os.path.dirname(__file__) + '/data/thyroid3.dt')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Результаты работы программы
+\end_layout
+
+\begin_layout Standard
+Для тестирования работы алгоритма применяется несколько датасетов.
+\end_layout
+
+\begin_layout Subsection
+Датасет cancer1
+\end_layout
+
+\begin_layout Standard
+Параметры алгоритма следующие:
+\end_layout
+
+\begin_layout Enumerate
+размер популяции комбинаций нейронов: 500
+\end_layout
+
+\begin_layout Enumerate
+размер популяции нейронов: 2000
+\end_layout
+
+\begin_layout Enumerate
+размер скрытого слоя: 20
+\end_layout
+
+\begin_layout Enumerate
+количество соединений на нейрон: 8
+\end_layout
+
+\begin_layout Standard
+Алгоритм инициализируется значениями от -1 до 1.
+ 
+\end_layout
+
+\begin_layout Standard
+Результат представлен на рисунке 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 01.png
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Рисунок 1.
+ Результаты работы программы.
+\end_layout
+
+\begin_layout Standard
+На данном рисунке представлено изменение среднеквадратичной ошибки лучшей
+ нейронной сети в процессе работы сети.
+ За 18000 поколений среднеквадратичная ошибка уменьшилась до значения 0.04628.
+ Таким образом алгоритм обучается, однако имеет крайне низкую производительность
+, расчёт занял около 16 часов.
+ Однако следует учитывать, что использовались большие размеры популяций.
+\end_layout
+
+\begin_layout Subsection
+Датасет glass1
+\end_layout
+
+\begin_layout Standard
+Используем несколько вариантов параметров:
+\end_layout
+
+\begin_layout Enumerate
+размер популяции комбинаций нейронов: 50 для всех вариантов
+\end_layout
+
+\begin_layout Enumerate
+размер популяции нейронов: 1000 для всех вариантов
+\end_layout
+
+\begin_layout Enumerate
+размер скрытого слоя: 5, 5, 25, 25
+\end_layout
+
+\begin_layout Enumerate
+количество соединений на нейрон: 4, 8, 4, 8
+\end_layout
+
+\begin_layout Standard
+Алгоритм инициализируется значениями от -1 до 1.
+ 
+\end_layout
+
+\begin_layout Standard
+Результат представлен на рисунке 2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 02.png
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Рисунок 2.
+ Результаты работы программы.
+\end_layout
+
+\begin_layout Standard
+На данном рисунке представлено изменение среднеквадратичной ошибки лучших
+ сетей для каждого из набора параметров.
+ Алгоритмы запускались на 20 поколений.
+ По результатам видно, что при увеличение размера скрытого слоя увеличивается
+ точность алгоритма.
+ Кроме того видно, что увеличение количества соединений так же увеличивает
+ точность алгоритма.
+\end_layout
+
+\begin_layout Section
+Вывод
+\end_layout
+
+\begin_layout Standard
+В результате выполнения индивидуального задания был реализован нейроэволюционный
+ алгоритм SANE.
+ Были проанализированы результаты и показано, что алгоритм решает задачу.
+\end_layout
+
+\end_body
+\end_document
